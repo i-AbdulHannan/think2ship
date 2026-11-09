@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>think2ship | AI Product studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:'Poppins',sans-serif;background:#022788}
+*{box-sizing:border-box}
+h1,h2,h3,.disp{font-family:'Bricolage Grotesque','Poppins',sans-serif;font-weight:800;margin:0;line-height:1}
+a{text-decoration:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 30px;border-radius:999px;font-family:'Poppins',sans-serif;font-weight:600;font-size:19px;cursor:pointer;transition:transform .3s}
+.btn:hover{transform:translateY(-3px)}
+.card{transition:transform .4s ease}
+.card:hover{transform:perspective(900px) translateY(-10px) rotateX(4deg) rotateY(-4deg)}
+.navlink{color:#022788;font-weight:500;font-size:16px;padding:12px 10px}
+.navlink:hover{text-decoration:underline}
+.field{width:100%;min-height:52px;border-radius:18px;border:2px solid #CCDDFF;background:#022788;color:#FFFFCC;font-family:'Poppins',sans-serif;font-size:17px;padding:12px 18px}
+.field::placeholder{color:#CCDDFF;opacity:.8}
+.field:focus{outline:3px solid #6699CC;outline-offset:2px}
+@keyframes floaty{0%,100%{transform:translateY(0) rotateY(-12deg) rotateZ(-2deg)}50%{transform:translateY(-18px) rotateY(12deg) rotateZ(2deg)}}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(14px,-22px)}}
+@keyframes spark{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+.obj{animation:floaty 9s ease-in-out infinite;transform-style:preserve-3d}
+.rise{animation:rise 1s ease both}
+.rise2{animation:rise 1s .2s ease both}
+.rise3{animation:rise 1s .4s ease both}
+.marq{display:flex;width:max-content;animation:marq 28s linear infinite}
+.d1{animation:drift 11s ease-in-out infinite}.d2{animation:drift 14s 2s ease-in-out infinite}.d3{animation:drift 9s 1s ease-in-out infinite}
+.sp{animation:spark 5s ease-in-out infinite}
+@media(max-width:860px){.navlinks{display:none}.hero{grid-template-columns:1fr!important;padding-top:130px!important}.heroart{order:-1;max-width:320px;margin:0 auto}}
+@media(prefers-reduced-motion:reduce){.obj,.d1,.d2,.d3,.sp,.marq,.rise,.rise2,.rise3{animation:none}}
+
+html{scroll-behavior:smooth}
+.js .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s ease,transform .9s ease}
+.js .reveal.in{opacity:1;transform:none}
+#glow{position:fixed;left:0;top:0;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;background:radial-gradient(circle,rgba(102,153,204,.55),rgba(102,153,204,0) 70%);pointer-events:none;z-index:100;opacity:0;transition:opacity .3s}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none}}
+
+/* Responsive layout: fluid sizing and no horizontal overflow */
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{width:100%;min-width:0;overflow-x:hidden}
+.site-shell{width:100%;max-width:1440px;margin:0 auto;overflow-x:clip}
+img,svg,canvas,video{max-width:100%}
+section{width:100%;min-width:0;scroll-margin-top:105px}
+section>div,.card,.contact-grid>*{min-width:0}
+.hero{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)!important;min-height:clamp(680px,88svh,860px)!important;padding:clamp(128px,12vw,160px) clamp(24px,6vw,88px) 88px!important}
+.hero h1{font-size:clamp(46px,6.4vw,96px)!important;line-height:1.02!important;overflow-wrap:break-word;text-wrap:balance}
+.hero p{font-size:clamp(16px,1.55vw,22px)!important}
+.heroart{min-width:0;display:flex;align-items:center;justify-content:center}
+.hero-logo{display:block;width:min(100%,540px);height:auto;max-height:540px;object-fit:contain;margin:0 auto;filter:drop-shadow(0 18px 35px rgba(0,0,0,.16))}
+.nav-shell{position:fixed;inset:0 0 auto;z-index:100;pointer-events:none}
+.main-nav{position:relative;pointer-events:auto;width:calc(100% - 32px)!important;max-width:1180px;margin:16px auto 0!important;min-height:58px}
+.navbrand{display:flex;align-items:center;flex:0 1 auto;min-width:0;max-width:35%}
+.navbrand img{display:block;width:auto;height:42px;max-width:160px;object-fit:contain}
+.navlinks{display:flex;align-items:center;gap:8px;min-width:0}
+.navlink{white-space:nowrap}
+.nav-toggle{display:none;align-items:center;justify-content:center;flex:0 0 42px;width:42px;height:42px;padding:0;border:0;border-radius:50%;background:#CCDDFF;color:#022788;cursor:pointer}
+.nav-toggle svg{width:21px;height:21px;display:block}
+.navlinks a{display:block}
+.marq span{padding-right:clamp(24px,4vw,48px)}
+.work-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(22px,3vw,40px)}
+.build-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.products-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.team-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.product-image{display:block;width:100%;height:auto;aspect-ratio:1.25/1;object-fit:cover;border-radius:28px;background:#6699CC}
+.product-badge{display:inline-flex;align-items:center;min-height:30px;padding:5px 11px;border-radius:999px;background:#FFFFCC;color:#022788;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;margin-bottom:14px}.product-action{display:inline-flex;align-items:center;gap:8px;margin-top:20px;color:#022788;font-size:15px;font-weight:600;border-bottom:2px solid #6699CC;padding-bottom:5px;transition:gap .25s ease}.product-action:hover{gap:13px}.coming-soon-art{display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;width:100%;aspect-ratio:1.25/1;border-radius:28px;background:radial-gradient(circle at 72% 28%,rgba(255,255,204,.95),transparent 28%),linear-gradient(135deg,#022788 0%,#2454b6 52%,#6699CC 100%)}.coming-soon-art:before,.coming-soon-art:after{content:'';position:absolute;border:1px solid rgba(255,255,204,.35);border-radius:50%;width:210px;height:210px}.coming-soon-art:after{width:290px;height:290px}.coming-soon-art svg{position:relative;z-index:1;width:42%;max-width:150px;filter:drop-shadow(0 12px 22px rgba(0,0,0,.18))}.coming-soon-label{position:absolute;left:18px;bottom:16px;color:#FFFFCC;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.founder-image{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:28px;background:#6699CC}
+.social-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.social-btn{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:8px 14px;border-radius:999px;background:#6699CC;color:#022788;font-size:13px;font-weight:600;line-height:1.35;transition:transform .25s ease;overflow-wrap:anywhere}
+.social-btn:hover{transform:translateY(-2px)}
+.contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,56px)}
+.contact-grid h2{font-size:clamp(44px,6.3vw,92px)!important;line-height:1.03!important;overflow-wrap:break-word;text-wrap:balance}
+.contact-panel{min-width:0}
+.field{display:block;width:100%;min-width:0;max-width:100%}
+footer{width:100%}
+.footer-brand{display:inline-flex;align-items:center;max-width:100%}
+.footer-brand img{display:block;width:auto;height:clamp(42px,5vw,60px);max-width:min(220px,68vw);object-fit:contain}
+.footer-links{display:flex;flex-wrap:wrap;gap:12px}
+
+@media(max-width:1100px){
+  .navlink{font-size:14px;padding:10px 7px}
+  .main-nav{gap:8px!important;padding-left:14px!important}
+  .navbrand img{max-width:140px;height:38px}
+  .main-nav>.btn{font-size:16px!important;padding:0 17px!important}
+  .hero h1{font-size:clamp(44px,6vw,74px)!important}
+  .build-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:980px){
+  .main-nav{width:calc(100% - 28px)!important;padding:7px 8px 7px 14px!important;gap:9px!important}
+  .nav-toggle{display:inline-flex}
+  .navlinks{display:none!important;position:absolute;top:calc(100% + 10px);left:0;right:0;z-index:110;flex-direction:column;align-items:stretch;gap:2px;padding:10px;border:1px solid rgba(2,39,136,.12);border-radius:22px;background:rgba(255,255,204,.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 14px 34px rgba(0,0,0,.16)}
+  .navlinks.is-open{display:flex!important}
+  .navlink{display:block;width:100%;padding:13px 14px;font-size:15px;border-radius:12px}
+  .navlink:hover{background:rgba(102,153,204,.18);text-decoration:none}
+  .main-nav.menu-open{border-radius:22px}
+  .hero{grid-template-columns:minmax(0,1fr)!important;min-height:auto!important;padding:130px clamp(24px,6vw,64px) 76px!important;gap:26px!important}
+  .heroart{order:-1;max-width:min(58vw,390px);margin:0 auto}
+  .hero-logo{max-height:390px}
+  .hero h1{max-width:850px;font-size:clamp(48px,7.5vw,76px)!important}
+  .work-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .contact-grid{grid-template-columns:minmax(0,1fr);gap:32px}
+  .contact-grid h2{max-width:850px}
+}
+@media(max-width:640px){
+  .main-nav{width:calc(100% - 20px)!important;margin-top:10px!important;min-height:50px;padding:6px 7px 6px 10px!important;gap:6px!important}
+  .navbrand{max-width:34%}
+  .navbrand img{height:33px;max-width:112px}
+  .nav-toggle{flex-basis:36px;width:36px;height:36px}
+  .nav-toggle svg{width:19px;height:19px}
+  .main-nav>.btn{min-height:38px!important;padding:0 12px!important;font-size:12px!important;white-space:nowrap}
+  .navlinks{top:calc(100% + 8px);border-radius:18px;padding:8px}
+  .navlink{font-size:14px;padding:12px}
+  .hero{padding:104px 22px 62px!important;gap:22px!important}
+  .heroart{max-width:min(72vw,300px)}
+  .hero-logo{max-height:300px}
+  .hero h1{font-size:clamp(38px,10.2vw,58px)!important;line-height:1.04!important}
+  .hero p{font-size:16px!important;line-height:1.6!important;margin:20px 0 26px!important}
+  .hero .rise3{gap:10px!important}
+  .hero .btn{font-size:13px!important;min-height:44px!important;padding:0 14px!important}
+  section:not(#top){padding:68px 22px!important}
+  section:not(#top) h2{font-size:clamp(36px,10vw,54px)!important;line-height:1.05!important;margin-bottom:32px!important}
+  #how .work-grid{grid-template-columns:minmax(0,1fr);gap:28px}
+  #how .work-grid .disp{font-size:72px!important}
+  #how .work-grid h3{font-size:32px!important}
+  #how .work-grid p{font-size:16px!important}
+  .build-grid{grid-template-columns:minmax(0,1fr);gap:15px}
+  .build-grid .card{min-height:205px!important;padding:26px 22px!important;border-radius:26px!important}
+  .build-grid h3{font-size:29px!important}
+  .products-grid,.team-grid{grid-template-columns:minmax(0,1fr);gap:18px}
+  .products-grid .card,.team-grid .card{border-radius:27px!important;padding:14px!important}
+  .product-image{aspect-ratio:1.28/1}
+  .founder-image{aspect-ratio:1/1;max-height:360px}
+  #products .reveal>p{font-size:16px!important;margin-bottom:30px!important}
+  #products .card h3{font-size:28px!important;line-height:1.1!important}
+  #products .card p{font-size:16px!important}
+  #team .card h3{font-size:27px!important;line-height:1.12!important}
+  #team .card p{font-size:16px!important}
+  .social-links{gap:8px}
+  .social-btn{font-size:12px;padding:8px 11px}
+  .contact-grid{grid-template-columns:minmax(0,1fr);gap:28px}
+  .contact-grid h2{font-size:clamp(38px,10.5vw,58px)!important}
+  .contact-grid>div>p{margin-top:20px!important}
+  .contact-instagram{font-size:14px!important;min-height:44px!important;padding:0 16px!important}
+  .contact-panel{padding:19px!important;border-radius:24px!important}
+  .contact-panel label{font-size:14px!important}
+  .field{font-size:16px;padding:11px 14px}
+  footer{padding:38px 22px!important}
+  footer>div{align-items:flex-start!important;flex-direction:column!important;gap:22px!important}
+  .footer-brand img{height:44px;max-width:190px}
+  .footer-links .btn{font-size:14px!important;min-height:42px!important;padding:0 16px!important}
+  #glow{display:none}
+}
+@media(max-width:360px){
+  .main-nav{width:calc(100% - 14px)!important;padding-left:8px!important;gap:4px!important}
+  .navbrand{max-width:31%}
+  .navbrand img{height:29px;max-width:88px}
+  .nav-toggle{flex-basis:33px;width:33px;height:33px}
+  .main-nav>.btn{font-size:11px!important;padding:0 9px!important;min-height:35px!important}
+  .hero{padding-left:18px!important;padding-right:18px!important}
+  .hero .btn{padding:0 11px!important;font-size:12px!important}
+  section:not(#top){padding-left:18px!important;padding-right:18px!important}
+  .contact-panel{padding:15px!important}
+  .social-btn{font-size:11px;padding:7px 9px}
+}
+@media(min-width:981px){
+  .navlinks{display:flex!important;position:static;box-shadow:none;background:transparent;border:0;padding:0}
+  .nav-toggle{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.social-btn{transition:none}}
+</style>
+</head>
+<body>
+<div id="glow" aria-hidden="true"></div>
+<div class="site-shell" style="width:100%;max-width:1440px;margin:0 auto;font-family:'Poppins',sans-serif;background:#022788;overflow-x:clip">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<radialGradient id="gC" cx=".35" cy=".3" r=".85"><stop offset="0" stop-color="#CCDDFF"/><stop offset=".5" stop-color="#6699CC"/><stop offset="1" stop-color="#022788"/></radialGradient>
+<radialGradient id="gP" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FFFFCC"/><stop offset=".6" stop-color="#CCDDFF"/><stop offset="1" stop-color="#6699CC"/></radialGradient>
+<radialGradient id="gW" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".3" stop-color="#FFFFCC"/><stop offset="1" stop-color="#CCDDFF"/></radialGradient>
+<filter id="soft"><feGaussianBlur stdDeviation="5"/></filter>
+</defs></svg>
+
+<div class="nav-shell">
+<nav class="main-nav" aria-label="Main" style="margin:16px auto 0;width:calc(100% - 32px);max-width:1180px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 10px 8px 22px;border-radius:999px;background:rgba(255,255,204,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)">
+<a href="#top" class="navbrand" aria-label="think2ship home"><img src="logo.png" alt="think2ship logo"></a>
+<div class="navlinks" id="primary-navigation" style="display:flex;align-items:center;gap:8px">
+<a class="navlink" href="#how">How we work</a><a class="navlink" href="#build">What we build</a><a class="navlink" href="#products">Our products</a>
+</div>
+<button class="nav-toggle" type="button" aria-label="Open navigation menu" aria-controls="primary-navigation" aria-expanded="false">
+<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+</button>
+<a href="https://www.instagram.com/think2ship/" class="btn" style="background:#6699CC;color:#022788;min-height:48px;padding:0 22px;font-size:19px">Start a project</a>
+</nav>
+</div>
+
+<section id="top" class="hero" style="position:relative;min-height:860px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:24px;padding:150px 6vw 90px;max-width:1440px;margin:0 auto">
+<div class="d1" style="position:absolute;left:4%;top:20%;width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFFFCC,#CCDDFF 60%,#6699CC)" aria-hidden="true"></div>
+<div class="d2" style="position:absolute;left:46%;bottom:12%;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFFFCC,#CCDDFF 60%,#6699CC)" aria-hidden="true"></div>
+<div class="d3" style="position:absolute;right:6%;top:16%;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#FFFFCC,#CCDDFF 60%,#6699CC)" aria-hidden="true"></div>
+<div style="position:relative;z-index:2">
+<h1 class="rise" style="font-size:clamp(46px,7.2vw,112px);color:#FFFFCC;letter-spacing:-.03em">You bring the problem. <span style="color:#6699CC">We ship the product.</span></h1>
+<p class="rise2" style="font-size:clamp(18px,1.6vw,22px);line-height:1.6;color:#CCDDFF;max-width:540px;margin:30px 0 38px">think2ship is a product studio & an AI agency for founders. We listen first, then build the product that solves it.</p>
+<div class="rise3" style="display:flex;flex-wrap:wrap;gap:14px">
+<a href="#contact" class="btn" style="background:#6699CC;color:#022788">Tell us your idea</a>
+<a href="#how" class="btn" style="border:2px solid #CCDDFF;color:#CCDDFF">See how we work</a>
+</div>
+</div>
+<div class="heroart" style="position:relative;z-index:1;width:100%">
+<img src="logo-2.png" alt="think2ship logo" class="hero-logo" fetchpriority="high" decoding="async">
+</div>
+</section>
+
+<div style="background:#022788;border-top:2px solid rgba(204,221,255,.25);border-bottom:2px solid rgba(204,221,255,.25);padding:26px 0;overflow:hidden" aria-label="Think it. Ship it.">
+<div class="marq disp" style="font-size:clamp(34px,4.6vw,64px);color:#CCDDFF;white-space:nowrap" aria-hidden="true">
+<span>Think it. Ship it.</span><span>Build boldly.</span><span>Launch faster.</span><span>From idea to impact.</span><span>Think it. Ship it.</span><span>Build boldly.</span><span>Launch faster.</span><span>From idea to impact.</span>
+</div>
+</div>
+
+<section id="how" style="background:#FFFFCC;padding:clamp(80px,10vw,140px) 6vw">
+<div class="reveal" style="max-width:1180px;margin:0 auto">
+<h2 style="font-size:clamp(42px,6vw,88px);color:#022788;letter-spacing:-.03em;margin-bottom:64px">How we work</h2>
+<div class="work-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px">
+<div>
+<svg width="104" height="104" viewBox="0 0 104 104" aria-hidden="true"><circle cx="48" cy="54" r="34" fill="url(#gC)"/><circle cx="80" cy="24" r="14" fill="url(#gW)"/></svg>
+<div class="disp" style="font-size:96px;color:#6699CC;margin:14px 0 6px">01</div>
+<h3 style="font-size:40px;color:#022788;margin-bottom:12px">Listen</h3>
+<p style="font-size:18px;line-height:1.6;color:#022788;margin:0">You tell us the problem in your own words.</p>
+</div>
+<div>
+<svg width="104" height="104" viewBox="0 0 104 104" aria-hidden="true"><rect x="8" y="58" width="60" height="36" rx="16" fill="url(#gC)"/><rect x="30" y="30" width="60" height="36" rx="16" fill="url(#gP)"/><rect x="14" y="8" width="44" height="30" rx="14" fill="url(#gC)"/></svg>
+<div class="disp" style="font-size:96px;color:#6699CC;margin:14px 0 6px">02</div>
+<h3 style="font-size:40px;color:#022788;margin-bottom:12px">Build</h3>
+<p style="font-size:18px;line-height:1.6;color:#022788;margin:0">Clear steps and honest updates, in plain language.</p>
+</div>
+<div>
+<svg width="104" height="104" viewBox="0 0 104 104" aria-hidden="true"><path d="M14 52H70M46 22L76 52L46 82" fill="none" stroke="#6699CC" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 46H70M46 16L76 46" fill="none" stroke="#CCDDFF" stroke-width="5" stroke-linecap="round" opacity=".8"/></svg>
+<div class="disp" style="font-size:96px;color:#6699CC;margin:14px 0 6px">03</div>
+<h3 style="font-size:40px;color:#022788;margin-bottom:12px">Ship</h3>
+<p style="font-size:18px;line-height:1.6;color:#022788;margin:0">Your product goes live and starts doing its job.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="build" style="background:#CCDDFF;padding:clamp(80px,10vw,140px) 6vw">
+<div class="reveal" style="max-width:1180px;margin:0 auto">
+<h2 style="font-size:clamp(42px,6vw,88px);color:#022788;letter-spacing:-.03em;margin-bottom:56px">What we build</h2>
+<div class="build-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px">
+<div class="card" style="background:#FFFFCC;border-radius:36px;padding:36px 30px;min-height:280px;display:flex;flex-direction:column;justify-content:space-between">
+<svg width="88" height="88" viewBox="0 0 88 88" aria-hidden="true"><circle cx="40" cy="48" r="30" fill="url(#gC)"/><circle cx="68" cy="20" r="12" fill="url(#gW)"/><circle cx="14" cy="16" r="7" fill="url(#gP)"/></svg>
+<h3 style="font-size:36px;color:#022788">AI products</h3></div>
+<div class="card" style="background:#FFFFCC;border-radius:36px;padding:36px 30px;min-height:280px;display:flex;flex-direction:column;justify-content:space-between">
+<svg width="88" height="88" viewBox="0 0 88 88" aria-hidden="true"><rect x="6" y="52" width="70" height="26" rx="13" fill="url(#gC)"/><rect x="12" y="30" width="62" height="26" rx="13" fill="url(#gP)"/><rect x="18" y="8" width="54" height="26" rx="13" fill="url(#gC)"/></svg>
+<h3 style="font-size:36px;color:#022788">SaaS platforms</h3></div>
+<div class="card" style="background:#FFFFCC;border-radius:36px;padding:36px 30px;min-height:280px;display:flex;flex-direction:column;justify-content:space-between">
+<svg width="88" height="88" viewBox="0 0 88 88" aria-hidden="true"><rect x="6" y="12" width="76" height="62" rx="20" fill="url(#gC)"/><rect x="6" y="12" width="76" height="20" rx="10" fill="url(#gP)"/><circle cx="20" cy="22" r="4" fill="#022788"/></svg>
+<h3 style="font-size:36px;color:#022788">Web applications</h3></div>
+<div class="card" style="background:#FFFFCC;border-radius:36px;padding:36px 30px;min-height:280px;display:flex;flex-direction:column;justify-content:space-between">
+<svg width="88" height="88" viewBox="0 0 88 88" aria-hidden="true"><circle cx="44" cy="44" r="36" fill="url(#gC)"/><ellipse cx="44" cy="44" rx="14" ry="36" fill="none" stroke="#CCDDFF" stroke-width="5"/><path d="M10 44H78" stroke="#CCDDFF" stroke-width="5"/></svg>
+<h3 style="font-size:36px;color:#022788">Websites</h3></div>
+</div>
+</div>
+</section>
+
+<section id="products" style="background:#022788;padding:clamp(80px,10vw,140px) 6vw">
+<div class="reveal" style="max-width:1180px;margin:0 auto">
+<h2 style="font-size:clamp(42px,6vw,88px);color:#FFFFCC;letter-spacing:-.03em;margin-bottom:20px">Our own products</h2>
+<p style="font-size:20px;line-height:1.6;color:#CCDDFF;margin:0 0 56px;max-width:650px">We build products that solve real problems — from smarter clinic operations to calmer client work, with more ideas on the way.</p>
+<div class="products-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px">
+<div class="card" style="background:#CCDDFF;border-radius:40px;padding:20px">
+<img src="c.png" alt="Cl1nical AI clinic management system preview" class="product-image" loading="lazy" decoding="async">
+<div style="padding:24px 14px 14px">
+<span class="product-badge">Live product</span>
+<h3 style="font-size:36px;color:#022788;margin-bottom:10px">Cl1nical</h3>
+<p style="font-size:18px;line-height:1.6;color:#022788;margin:0">An AI-powered clinic management system that brings appointments, patient records, digital prescriptions, lab reports and daily operations into one connected workspace. Assistive AI supports workflows while clinical decisions stay with healthcare professionals.</p>
+<a class="product-action" href="https://cl1nical.vercel.app/" target="_blank" rel="noopener noreferrer">Explore Cl1nical <span aria-hidden="true">↗</span></a>
+</div>
+</div>
+<div class="card" style="background:#CCDDFF;border-radius:40px;padding:20px">
+<img src="w.png" alt="workroomWR client project workspace preview" class="product-image" loading="lazy" decoding="async">
+<div style="padding:24px 14px 14px">
+<span class="product-badge">In-Building</span>
+<h3 style="font-size:36px;color:#022788;margin-bottom:10px">workroomWR</h3>
+<p style="font-size:18px;line-height:1.6;color:#022788;margin:0">One professional room for every client project. Keep milestones, files, approvals, payments, conversations and final delivery together — without the WhatsApp chaos.</p>
+<a class="product-action" href="https://workroom-by-hb.vercel.app/" target="_blank" rel="noopener noreferrer">Explore workroomWR <span aria-hidden="true">↗</span></a>
+</div>
+</div>
+<div class="card" style="background:#CCDDFF;border-radius:40px;padding:20px">
+<div class="coming-soon-art" role="img" aria-label="Abstract illustration representing the upcoming thinkmate AI product">
+<svg viewBox="0 0 160 160" fill="none" aria-hidden="true">
+<path d="M80 18c-25 0-45 20-45 45 0 17 9 31 23 39v17c0 7 6 13 13 13h18c7 0 13-6 13-13v-17c14-8 23-22 23-39 0-25-20-45-45-45Z" fill="#FFFFCC" fill-opacity=".96"/>
+<path d="M61 137h38M67 148h26" stroke="#FFFFCC" stroke-width="7" stroke-linecap="round"/>
+<path d="m80 40 6 18 18 6-18 6-6 18-6-18-18-6 18-6 6-18Z" fill="#6699CC"/>
+<circle cx="118" cy="36" r="7" fill="#FFFFCC"/><circle cx="37" cy="87" r="5" fill="#CCDDFF"/>
+</svg>
+<span class="coming-soon-label">A new idea is taking shape</span>
+</div>
+<div style="padding:24px 14px 14px">
+<span class="product-badge">Coming soon</span>
+<h3 style="font-size:36px;color:#022788;margin-bottom:10px">thinkmate AI</h3>
+<p style="font-size:18px;line-height:1.6;color:#022788;margin:0">Your AI co-pilot for turning scattered thoughts into clear plans, useful content and actionable next steps. A smarter way to think, create and ship — currently in the works.</p>
+<span class="product-action" aria-label="thinkmate AI is coming soon">Something smart is coming <span aria-hidden="true">✦</span></span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="team" style="background:#FFFFCC;padding:clamp(80px,10vw,140px) 6vw">
+<div class="reveal" style="max-width:1180px;margin:0 auto">
+<h2 style="font-size:clamp(42px,6vw,88px);color:#022788;letter-spacing:-.03em;margin-bottom:56px">The team</h2>
+<div class="team-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px">
+<div class="card" style="background:#CCDDFF;border-radius:40px;padding:20px">
+<img src="f-1.jpg" alt="Abdul Hannan Ghaznavi" class="founder-image" loading="lazy" decoding="async">
+<div style="padding:22px 14px 12px"><h3 style="font-size:34px;color:#022788;margin-bottom:8px">Abdul Hannan Ghaznavi</h3><p style="font-size:18px;color:#022788;margin:0">Co-founder & Software Engineer</p><div class="social-links"><a class="social-btn" href="https://www.instagram.com/hannanbuilds/" target="_blank" rel="noopener noreferrer">Instagram</a><a class="social-btn" href="https://www.linkedin.com/in/hannanbuilds/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div></div>
+</div>
+<div class="card" style="background:#CCDDFF;border-radius:40px;padding:20px">
+<img src="f-2.jpeg" alt="Saad Kamal" class="founder-image" loading="lazy" decoding="async">
+<div style="padding:22px 14px 12px"><h3 style="font-size:34px;color:#022788;margin-bottom:8px">Saad Kamal</h3><p style="font-size:18px;color:#022788;margin:0">Co-founder & MERN stack developer</p><div class="social-links"><a class="social-btn" href="https://www.instagram.com/dev_saadkamal/" target="_blank" rel="noopener noreferrer">Instagram</a><a class="social-btn" href="https://www.linkedin.com/in/saad-kamal-dev/" target="_blank" rel="noopener noreferrer">LinkedIn</a></div></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="contact" style="background:#022788;padding:clamp(80px,10vw,140px) 6vw">
+<div class="reveal contact-grid" style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:56px;align-items:start">
+<div>
+<h2 style="font-size:clamp(46px,7vw,104px);color:#FFFFCC;letter-spacing:-.03em">Got an idea? <span style="color:#6699CC">Send us a message.</span></h2>
+<p style="font-size:19px;color:#CCDDFF;margin:28px 0 0"><a class="btn contact-instagram" href="https://www.instagram.com/think2ship/" target="_blank" rel="noopener noreferrer">Instagram&nbsp; @think2ship</a></p>
+</div>
+<div class="contact-panel" style="background:rgba(204,221,255,.1);border:2px solid rgba(204,221,255,.35);border-radius:36px;padding:32px">
+<div style="display:flex;flex-direction:column;gap:18px">
+<div><label for="n" style="display:block;color:#CCDDFF;font-size:16px;font-weight:500;margin-bottom:8px">Name</label><input id="n" class="field" type="text" placeholder="Your name"></div>
+<div><label for="e" style="display:block;color:#CCDDFF;font-size:16px;font-weight:500;margin-bottom:8px">Email</label><input id="e" class="field" type="email" placeholder="you@email.com"></div>
+<div><label for="i" style="display:block;color:#CCDDFF;font-size:16px;font-weight:500;margin-bottom:8px">Your idea</label><textarea id="i" class="field" rows="4" placeholder="Tell us the problem in your own words" style="resize:vertical"></textarea></div>
+<button type="button" class="btn" style="background:#6699CC;color:#022788;border:0;width:100%">Send</button>
+</div>
+</div>
+</div>
+</section>
+
+<footer style="background:#022788;border-top:2px solid rgba(204,221,255,.25);padding:56px 6vw">
+<div style="max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px">
+<div>
+<a href="#top" class="footer-brand" aria-label="think2ship home"><img src="b.png" alt="think2ship logo" loading="lazy" decoding="async"></a>
+<p style="font-size:17px;color:#CCDDFF;margin:12px 0 0">a product studio & an AI agency for founders.</p>
+</div>
+<div class="footer-links" style="display:flex;gap:12px">
+<a href="https://www.instagram.com/think2ship/" target="_blank" rel="noopener noreferrer" class="btn" style="border:2px solid #CCDDFF;color:#CCDDFF;min-height:48px;padding:0 24px;font-size:17px">Instagram</a>
+<a href="https://www.linkedin.com/company/thinktwoship/" class="btn" style="border:2px solid #CCDDFF;color:#CCDDFF;min-height:48px;padding:0 24px;font-size:17px">LinkedIn</a>
+</div>
+</div>
+</footer>
+</div>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var nav = document.querySelector('.main-nav');
+  var navToggle = document.querySelector('.nav-toggle');
+  var navLinks = document.querySelectorAll('#primary-navigation a');
+  function closeMenu(){
+    if(!nav || !navToggle) return;
+    nav.classList.remove('menu-open');
+    var menu = document.getElementById('primary-navigation');
+    if(menu) menu.classList.remove('is-open');
+    navToggle.setAttribute('aria-expanded','false');
+    navToggle.setAttribute('aria-label','Open navigation menu');
+  }
+  if(nav && navToggle){
+    navToggle.addEventListener('click',function(){
+      var menu = document.getElementById('primary-navigation');
+      var opening = navToggle.getAttribute('aria-expanded') !== 'true';
+      navToggle.setAttribute('aria-expanded',String(opening));
+      navToggle.setAttribute('aria-label',opening ? 'Close navigation menu' : 'Open navigation menu');
+      nav.classList.toggle('menu-open',opening);
+      if(menu) menu.classList.toggle('is-open',opening);
+    });
+    navLinks.forEach(function(link){link.addEventListener('click',closeMenu)});
+    document.addEventListener('keydown',function(event){if(event.key === 'Escape') closeMenu()});
+    document.addEventListener('click',function(event){if(!nav.contains(event.target)) closeMenu()});
+    window.addEventListener('resize',function(){if(window.innerWidth > 980) closeMenu()});
+  }
+
+  var revealItems = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.12});
+    revealItems.forEach(function(item){io.observe(item)});
+  } else {
+    revealItems.forEach(function(item){item.classList.add('in')});
+  }
+
+  var glow = document.getElementById('glow');
+  if(glow && window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    window.addEventListener('pointermove', function(event){
+      glow.style.opacity = '1';
+      glow.style.transform = 'translate('+event.clientX+'px,'+event.clientY+'px)';
+    }, {passive:true});
+    document.addEventListener('pointerleave', function(){glow.style.opacity = '0'});
+  }
+})();
+</script>
+</body>
+</html>
